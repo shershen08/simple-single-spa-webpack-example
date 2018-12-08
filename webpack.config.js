@@ -29,9 +29,24 @@ module.exports = {
   },
   module: {
     rules: [{
+      // all other JS + React
         test: /\.js?$/,
         exclude: [path.resolve(__dirname, 'node_modules')],
         loader: 'babel-loader',
+        options: {
+          presets: ['@babel/react', '@babel/env'],
+          plugins: ['@babel/plugin-syntax-dynamic-import']
+        }
+      },
+      // hyperApp
+      {
+        test: /\.hyper\.js?$/,
+        exclude: [path.resolve(__dirname, 'node_modules')],
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/react', '@babel/env'],
+          plugins: ['@babel/plugin-syntax-dynamic-import', ['@babel/plugin-transform-react-jsx', { 'pragma': 'h' }]]
+        }
       },
       {
         test: /\.tsx?$/,
